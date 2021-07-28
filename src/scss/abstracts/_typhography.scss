@@ -1,0 +1,18 @@
+@use "../abstracts/variables" as var;
+.heading-1{
+    white-space: nowrap;
+    font-family: inherit;
+    font-size: 3rem;
+    text-align: center;
+    color: var.$color-white;
+    @media only screen and (max-width:var.$bp-med){font-size: 2.4rem;}
+}
+
+.heading-2{
+    font-family: inherit;
+    font-size: 2.2rem;
+    font-weight: var.$font-bold;
+    text-align: center;
+    color: var.$color-white;
+    @media only screen and (max-width:var.$bp-med){font-size: 1.8rem; font-weight: 300;}
+}

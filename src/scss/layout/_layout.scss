@@ -1,0 +1,163 @@
+@use "../abstracts" as abs;
+.main{
+    min-width: 100%;
+    min-height: 100vh;
+    padding: 10rem 0;
+    display: grid;
+    grid-template-rows: repeat(2,min-content);
+    grid-gap: 10rem;
+    justify-items: center;
+    background-image: abs.$gradient-bg;
+}
+
+.card__container{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search{
+    width: 60rem;
+    grid-row: 1 / 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateX(3rem); // For completely centering this whole element
+    @media only screen and (max-width:abs.$bp-med){width: 80%;}
+
+    &__input{
+        width: 100%;
+        height: 6rem;
+        border: none;
+        border-radius: 6rem;
+        text-align: center;
+        font-size: 2rem;
+        letter-spacing: 1.3px;
+        background-color: abs.$color-white;
+
+        &:focus{
+            outline: none;
+            box-shadow: 0 0 1rem 0 abs.$color-blue--dark;
+        }
+    }
+
+    &__button{
+        width: 5rem;
+        height: 5rem;
+        border-radius: 50%;
+        border: none;
+        transform: translateX(-110%);
+
+        @media only screen and (max-width:abs.$bp-med){
+            width: 7rem;
+            height: 5rem;
+            border-radius: 5rem;}
+    }
+
+    &__icon{
+        width: 100%;
+        height: 100%;
+        &--svg{fill: abs.$color-blue;}
+    }
+}
+
+.card{
+    width: 100rem;
+    grid-row: 2 / 3;
+    display: grid;
+    grid-template-rows: repeat(2,min-content);
+    border-radius: 2rem;
+    background-image: abs.$gradient-main;
+
+    @media only screen and (max-width:abs.$bp-largest){width: 95%;}
+
+    &__header{
+        padding: 1.8rem 2.7rem;
+        border-radius: .5rem;
+        background-color: abs.$color-black;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%,-25%);
+
+        &--info{
+            display: flex;
+            flex-direction: column;
+            gap: .5rem;
+
+            & span{
+                font-size: 1.3rem;
+                font-weight: 300;
+                color: #ddd;
+            }
+        }
+    }
+
+    &__weather{
+        width: 100%;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        align-items: center;
+        gap: 5rem;
+        margin-bottom: 5rem;
+        color: abs.$color-white;
+
+        &--temp{
+            margin-top: 10rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            font-size: 6rem;
+            &--current{
+                display: flex; 
+                align-items: center; 
+                gap: 1rem;
+            }
+            &--minmax{
+                font-size: 1.5rem; 
+                align-self: flex-end;
+                margin-bottom: 1rem;
+            }
+            &--feel, &--description{font-size: 1.8rem;}
+            &--icon{width: 10rem; height: 10rem;}
+        }
+
+        &--details{
+            display: flex;
+            justify-items: center;
+            gap: 4rem;
+            font-size: 1.8rem;
+
+            @media only screen and (max-width:abs.$bp-med){ gap: 2rem; font-size: 1.6rem;}
+            @media only screen and (max-width:abs.$bp-smallest){gap: 1rem;}
+        }
+
+        &--detail{
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+        }
+
+        &--icons{width: 4rem; height: 4rem;}
+        &--icon{fill: abs.$color-white;}
+    }
+
+    &__forecasts{
+        width: 100%;
+        padding: 1.5rem 2.5rem;
+        display: grid;
+        grid-template-columns: repeat(6,1fr);
+        color: abs.$color-white;
+        @media only screen and (max-width:abs.$bp-small){
+            padding: .5rem 1rem;
+            grid-template-columns: repeat(auto-fit,minmax(15rem,1fr));
+            grid-row-gap: 4rem;
+        }
+    }
+}
+

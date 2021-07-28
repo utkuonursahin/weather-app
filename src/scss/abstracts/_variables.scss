@@ -1,0 +1,25 @@
+// Font style
+$font:'Ubuntu', sans-serif;
+$font-bold: 500;
+$font-tiny: 300;
+
+// Colors
+$color-electiricblue:hsl(183, 100%, 48%);
+$color-blue--light:hsl(207, 43%, 60%);
+$color-blue:hsl(221, 33%, 48%);
+$color-blue--dark:hsl(220, 29%, 32%); //Border
+$color-purple:hsl(235, 30%, 46%);
+$color-white:hsl(60, 100%, 99%);
+$color-black:hsl(232, 19%, 16%);
+$color-gray:hsl(210, 50%, 95%);;
+
+// Gradients
+$gradient-bg: linear-gradient(to right bottom, hsl(221, 33%, 48%),hsl(183, 100%, 48%));
+$gradient-main: linear-gradient(to right bottom, hsl(207, 43%, 60%), hsl(235, 30%, 46%));
+
+// Breakpoints
+$bp-largest:75em; //1200px
+$bp-large: 50em; //800px
+$bp-med: 37.5em; //600px
+$bp-small: 31.25em; //500px
+$bp-smallest: 25em; //400px
