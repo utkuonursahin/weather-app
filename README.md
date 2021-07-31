@@ -18,5 +18,7 @@ I used Netlify's serverless functions for fetching data and hiding my API keys o
 
 **I focused on functionality** more than design and wanted to keep the design simple. I accept that its design might needs some more work. I may update its design in the future.
 
+With serverless functions, response object's(fetched on Netlify's server from Google's server) **statusText** property is empty in Chrome. So, I can display error's status code but not it's text unfortunately. Moreover without serverless functions, Google Geocoding API accepts words which are not in English for example **İstanbul** with uppercase **i** at the start. But with serverless functions it's not possible I think it's Netlify's issue too. If you do researchs which are not proper in English you will get an error. Since Netlify's serverless functions doesn't return any reason text, I have nothing to show you as an error text at least in Chrome. So, for fixing that I added some small information to error message manually.
+
 #### Author : Utku Onur Sahin
 ##### Date : 28.07.2021

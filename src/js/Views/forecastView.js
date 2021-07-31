@@ -23,7 +23,7 @@ class ForecastView extends View{
                         ${forecast.tempDay}°C
                         <span class="card__weather--temp--minmax">${forecast.tempMin} / ${forecast.tempMax}</span>
                     </span>
-                    <img src="http://openweathermap.org/img/wn/${forecast.icon}@2x.png" alt="" class="card__weather--temp--icon">
+                    <img src="https://openweathermap.org/img/wn/${forecast.icon}@2x.png" alt="" class="card__weather--temp--icon">
                     <span class="card__weather--temp--description">${forecast.description}</span>
                     <span class="card__weather--temp--feel">RealFeel : ${forecast.tempFeel}°C</span>
                 </div>
@@ -68,7 +68,7 @@ class ForecastView extends View{
         return `
              <div class="forecast">
                   <h2 class="heading-2 forecast__date">${forecast.day}<span>${forecast.date}</span></h2>
-                  <img src="http://openweathermap.org/img/wn/${forecast.icon}@2x.png" alt="Forecast icon" class="forecast__icon">
+                  <img src="https://openweathermap.org/img/wn/${forecast.icon}@2x.png" alt="Forecast icon" class="forecast__icon">
                   <span class="forecast__temp">${forecast.tempDay}°</span>
                   <span class="forecast__description">${forecast.main}</span>
              </div>`

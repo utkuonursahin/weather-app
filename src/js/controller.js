@@ -24,9 +24,9 @@ const controlGeoLocation = async function(){
 
 const controlSearchResult = async function(){
     try{
-        forecastView.renderSpinner()
         const query = searchView.getQuery()
         if(!query) return
+        forecastView.renderSpinner()
         await model.getGeoAddress(query)
         await model.getWeatherData()
         model.setForecasts()
