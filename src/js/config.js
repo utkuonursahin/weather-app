@@ -17,3 +17,4 @@ export const INTL_DATE_OPTIONS = {
 export const INTL_HOUR_OPTIONS = {hourCycle:'h24', hour:'2-digit', minute:'2-digit'}
 
 export const CONVERT_TO_MS = 1000
+export const TIMEOUT_SEC = 8

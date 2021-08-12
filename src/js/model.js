@@ -47,18 +47,22 @@ export const setForecasts = function (){
 }
 
 export const getGeoAddress = async function(query){ //name to coordinates
-    const data = await getJSON(`${GC_API_URL}&address=${query}&key=${GC_API_ID}`)
-    if(data.status === 'ZERO_RESULTS') throw new Error(INVALID_QUERY)
-    const [dataResult] = data.results
-    const addressArray = dataResult.formatted_address.split(',')
-    if(addressArray.length < 2) throw new Error(INVALID_QUERY)
-    //--> Destructuring cause unwanted results for some cities (e.g Rome, New York), they should be exactly the first and last element on array.
-    const city = addressArray[0]
-    const country = addressArray[addressArray.length-1].trim()
-    state.location = {
-        lat: dataResult.geometry.location.lat,
-        lng: dataResult.geometry.location.lng,
-        country, city
+    try{
+        const data = await getJSON(`${GC_API_URL}&address=${query}&key=${GC_API_ID}`)
+        if(data.status === 'ZERO_RESULTS') throw new Error(INVALID_QUERY)
+        const [dataResult] = data.results
+        const addressArray = dataResult.formatted_address.split(',')
+        if(addressArray.length < 2) throw new Error(INVALID_QUERY)
+        //--> Destructuring cause unwanted results for some cities (e.g Rome, New York), they should be exactly the first and last element on array.
+        const city = addressArray[0]
+        const country = addressArray[addressArray.length-1].trim()
+        state.location = {
+            lat: dataResult.geometry.location.lat,
+            lng: dataResult.geometry.location.lng,
+            country, city
+        }
+    }catch (error){
+        throw error
     }
 }
 
@@ -67,6 +71,7 @@ export const getReverseGeoAddress = async function(coords){ //coordinates to nam
         const {latitude: lat, longitude: lng} = coords
         const data = await getJSON(`${GC_API_URL}&latlng=${lat},${lng}&${GC_API_SEARCH_TYPE}&key=${GC_API_ID}`)
         const [dataResult] = data.results
+        if(!dataResult) throw new Error(`Something went wrong: Server problem`) //There can be 'undefined' only if the request rejected by API
         const [city,country] = dataResult.formatted_address.split(',')
         state.location = {lat, lng, city, country: country.trim()}
     }catch (error){
