@@ -9,14 +9,14 @@ export const state ={
     location: {}, // Holding location data for future
     allForecasts: [], // All weather forecast data came from API
     currentForecast:{}, // Weather forecast for current day
-    weeklyForecasts: {} // Weather forecasts for other six days
+    weeklyForecasts: [] // Weather forecasts for other six days
 }
 
 export const setForecasts = function (){
     //Setting current forecast with detailed information
     const curForecast = state.allForecasts[0]
     state.currentForecast = {
-        // Rounding temperatures to closes integer
+        // Rounding temperatures to closest integer
         tempDay: Math.round(curForecast.temp.day),
         tempMin: Math.round(curForecast.temp.min),
         tempMax: Math.round(curForecast.temp.max),
@@ -25,9 +25,11 @@ export const setForecasts = function (){
         sunrise: new Intl.DateTimeFormat('en', INTL_HOUR_OPTIONS).format(new Date(curForecast.sunrise * CONVERT_TO_MS)),
         sunset: new Intl.DateTimeFormat('en', INTL_HOUR_OPTIONS).format(new Date(curForecast.sunset * CONVERT_TO_MS)),
         date: new Intl.DateTimeFormat('en', INTL_DATE_OPTIONS).format(curForecast.dt * CONVERT_TO_MS),
+        // Setting other information
         humidity: curForecast.humidity,
         windSpeed: curForecast.wind_speed,
         icon: curForecast.weather[0].icon,
+        // Converting 'clear sky' to 'Clear sky'
         description: (curForecast.weather[0].description).replace(curForecast.weather[0].description[0],curForecast.weather[0].description[0].toUpperCase())
     }
     //Setting other six days forecast with less detailed information
@@ -51,8 +53,9 @@ export const getGeoAddress = async function(query){ //name to coordinates
         const data = await getJSON(`${GC_API_URL}&address=${query}&key=${GC_API_ID}`)
         if(data.status === 'ZERO_RESULTS') throw new Error(INVALID_QUERY)
         const [dataResult] = data.results
-        const addressArray = dataResult.formatted_address.split(',')
-        if(addressArray.length < 2) throw new Error(INVALID_QUERY)
+        if(!dataResult) throw new Error(`Something went wrong: Server problem`) //dataResult can be 'undefined' only if the request rejected by API
+        const addressArray = dataResult.formatted_address.split(',')//formatted_address likes "Berlin, Germany"
+        if(addressArray.length < 2) throw new Error(INVALID_QUERY) //only possible if only country name researched instead of city name
         //--> Destructuring cause unwanted results for some cities (e.g Rome, New York), they should be exactly the first and last element on array.
         const city = addressArray[0]
         const country = addressArray[addressArray.length-1].trim()
@@ -71,8 +74,8 @@ export const getReverseGeoAddress = async function(coords){ //coordinates to nam
         const {latitude: lat, longitude: lng} = coords
         const data = await getJSON(`${GC_API_URL}&latlng=${lat},${lng}&${GC_API_SEARCH_TYPE}&key=${GC_API_ID}`)
         const [dataResult] = data.results
-        if(!dataResult) throw new Error(`Something went wrong: Server problem`) //There can be 'undefined' only if the request rejected by API
-        const [city,country] = dataResult.formatted_address.split(',')
+        if(!dataResult) throw new Error(`Something went wrong: Server problem`) //dataResult can be 'undefined' only if the request rejected by API
+        const [city,country] = dataResult.formatted_address.split(',') //formatted_address likes "Berlin, Germany"
         state.location = {lat, lng, city, country: country.trim()}
     }catch (error){
         throw error

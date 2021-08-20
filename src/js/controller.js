@@ -5,12 +5,11 @@ import * as model from './model'
 import forecastView from './Views/forecastView'
 import searchView from "./Views/searchView";
 import {getPosition} from "./helpers";
-if (module.hot) module.hot.accept() //Hot module replacement
+if (module.hot) module.hot.accept() //HMR(only for developing purposes)
 
 const controlGeoLocation = async function(){
     try{
         if(!navigator.geolocation) return
-        //await Promise.reject(new Error('Rejected')) //It's the same as if there is an error throw.
         const position = await getPosition()
         forecastView.renderSpinner()
         await model.getReverseGeoAddress(position.coords)

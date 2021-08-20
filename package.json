@@ -1,7 +1,7 @@
 {
-  "name": "weather-app",
+  "name": "todo-app",
   "version": "1.0.0",
-  "description": "Weather app",
+  "description": "Todo app",
   "main": "index.html",
   "scripts": {
     "start": "parcel index.html",
@@ -10,10 +10,10 @@
   "author": "Utku Sahin",
   "license": "ISC",
   "devDependencies": {
-    "@babel/core": "^7.14.6",
+    "@babel/core": "^7.15.0",
     "@babel/preset-env": "^7.14.7",
     "parcel-bundler": "^1.12.5",
-    "sass": "^1.35.1"
+    "sass": "^1.38.0"
   },
   "dependencies": {
     "@babel/runtime": "^7.14.6",
