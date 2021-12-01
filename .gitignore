@@ -1,7 +1,5 @@
 node_modules
-.cache
 dist
+.cache
 .idea
-.babelrc
-.htmlnanorc
-src/js/apiID.js
+/.env

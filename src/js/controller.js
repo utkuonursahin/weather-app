@@ -5,7 +5,8 @@ import * as model from './model'
 import forecastView from './Views/forecastView'
 import searchView from "./Views/searchView";
 import {getPosition} from "./helpers";
-if (module.hot) module.hot.accept() //HMR(only for developing purposes)
+
+if (module.hot) module.hot.accept() //Hot module replacement
 
 const controlGeoLocation = async function(){
     try{
